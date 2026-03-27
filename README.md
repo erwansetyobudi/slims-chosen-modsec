@@ -24,11 +24,11 @@ Biasanya request seperti ini yang diblokir:
 
 ## Cara Kerja Plugin
 
-Berdasarkan struktur file yang Anda berikan, plugin ini bekerja dengan beberapa pendekatan:
+plugin ini bekerja dengan beberapa pendekatan:
 
 ### 1. **Mengubah Endpoint AJAX Lookup**
 
-Di kode Anda (file `index.php` yang error), saya melihat baris ini:
+Di kode (file `index.php` yang error), saya melihat baris ini:
 
 ```php
 // Pada bagian Publisher
