@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Choosen ModSec Experiment
- * Plugin URI: -
- * Description: Ekperimen Module Security SLiMS
- * Version: 0.0.1
- * Author: Drajat Hasan
- * Author URI: https://t.me/drajathasan
+ * Plugin Name: Choosen ModSec
+ * Plugin URI: https://github.com/erwansetyobudi/slims-chosen-modsec/
+ * Description: Module Security SLiMS 9.72
+ * Version: 2.0
+ * Author: Drajat Hasan and Erwan Setyo Budi
+ * Author URI: https://github.com/erwansetyobudi
  */
 
 // get plugin instance
