@@ -1256,8 +1256,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
         $datagrid->invisible_fields = array(1, 2, 3);
         $datagrid->setSQLorder('index.last_update DESC');
 
-        // set group by
-        $datagrid->sql_group_by = 'index.biblio_id';
+        // set group by - PERBAIKAN: tambahkan semua kolom non-agregat
+        $datagrid->sql_group_by = 'index.biblio_id, index.title, index.labels, index.image, index.author, index.isbn_issn, index.last_update';
 
     } else {
         require LIB . 'biblio_list.inc.php';
@@ -1283,8 +1283,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
         $datagrid->invisible_fields = array(0);
         $datagrid->setSQLorder('biblio.last_update DESC');
 
-        // set group by
-        $datagrid->sql_group_by = 'biblio.biblio_id';
+        // set group by - PERBAIKAN: tambahkan semua kolom non-agregat
+        $datagrid->sql_group_by = 'biblio.biblio_id, biblio.title, biblio.isbn_issn, biblio.last_update';
     }
 
     $stopwords = "@\sAnd\s|\sOr\s|\sNot\s|\sThe\s|\sDan\s|\sAtau\s|\sAn\s|\sA\s@i";
@@ -1323,13 +1323,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'history') {
 
     $datagrid->setSQLcriteria($str_criteria);
 
-    // set table and table header attributes
+// set table and table header attributes
     $datagrid->table_attr = 'id="dataList" class="s-table table"';
     $datagrid->table_header_attr = 'class="dataListHeader" style="font-weight: bold;"';
     // set delete proccess URL
     $datagrid->chbox_form_URL = $_SERVER['PHP_SELF'];
     $datagrid->debug = true;
 
+    // TAMBAHKAN BARIS INI SEBELUM createDataGrid
+    // Fix ONLY_FULL_GROUP_BY - menonaktifkan sementara mode ONLY_FULL_GROUP_BY
+    $dbs->query("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+    
     // put the result into variables
     $datagrid_result = $datagrid->createDataGrid($dbs, $table_spec, $biblio_result_num, ($can_read AND $can_write));
     if (isset($_GET['keywords']) AND $_GET['keywords']) {
